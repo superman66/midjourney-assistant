@@ -13,7 +13,11 @@ import {
   Col,
   Row,
   InputPicker,
+  IconButton,
+  toaster,
+  Message,
 } from "rsuite";
+import CopyIcon from "@rsuite/icons/Copy";
 import Textarea from "./TextArea";
 
 const initialFormValue = {
@@ -41,37 +45,66 @@ export const PromptGenerator = () => {
     setPrompt(prompt);
   };
 
+  const handleCopy = async () => {
+    if (navigator.clipboard && prompt) {
+      await navigator.clipboard.writeText(prompt);
+      toaster.push(
+        <Message showIcon type="info" closable>
+          prompt 已复制到剪贴板
+        </Message>
+      );
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center">
       <div>
         <Form
-          className="w-[800px] rounded-lg border p-8"
+          className="md:w-[800px] rounded-lg border p-5 m-3"
           fluid
           formValue={formValue}
           onChange={onChange}
         >
-          {prompt && <div className="mb-[30px]">Prompt：{prompt}</div>}
+          {prompt && (
+            <div className="mb-[10px] text-lg">
+              Prompt：{prompt}
+              <span>
+                {" "}
+                <IconButton
+                  appearance="default"
+                  icon={<CopyIcon />}
+                  onClick={handleCopy}
+                />
+              </span>
+            </div>
+          )}
           <Grid fluid>
             <Row>
-              <Col xs={12} className="mb-[10px]">
+              <Col md={12} xs={24} className="mb-[10px]">
                 <Form.Group controlId="scene">
                   <Form.ControlLabel>场景🏠</Form.ControlLabel>
-                  <Form.Control name="scene" placeholder="请输入你想要的场景" />
+                  <Form.Control
+                    size="lg"
+                    name="scene"
+                    placeholder="请输入你想要的场景"
+                  />
                 </Form.Group>
               </Col>
-              <Col xs={12} className="mb-[10px]">
+              <Col md={12} xs={24} className="mb-[10px]">
                 <Form.Group controlId="character">
                   <Form.ControlLabel>人物👧</Form.ControlLabel>
                   <Form.Control
+                    size="lg"
                     name="character"
                     placeholder="请输入你想要的人物"
                   />
                 </Form.Group>
               </Col>
-              <Col xs={12} className="mb-[10px]">
+              <Col md={12} xs={24} className="mb-[10px]">
                 <Form.Group controlId="light">
                   <Form.ControlLabel>光线🌝</Form.ControlLabel>
                   <Form.Control
+                    size="lg"
                     name="light"
                     block
                     accepter={CheckPicker}
@@ -80,10 +113,11 @@ export const PromptGenerator = () => {
                   />
                 </Form.Group>
               </Col>
-              <Col xs={12} className="mb-[10px]">
+              <Col md={12} xs={24} className="mb-[10px]">
                 <Form.Group controlId="photographer">
                   <Form.ControlLabel>摄影师风格📸</Form.ControlLabel>
                   <Form.Control
+                    size="lg"
                     name="photographer"
                     block
                     accepter={InputPicker}
@@ -92,10 +126,11 @@ export const PromptGenerator = () => {
                   />
                 </Form.Group>
               </Col>
-              <Col xs={12} className="mb-[10px]">
+              <Col md={12} xs={24} className="mb-[10px]">
                 <Form.Group controlId="camera">
                   <Form.ControlLabel>相机📷</Form.ControlLabel>
                   <Form.Control
+                    size="lg"
                     name="camera"
                     block
                     accepter={InputPicker}
@@ -104,10 +139,11 @@ export const PromptGenerator = () => {
                   />
                 </Form.Group>
               </Col>
-              <Col xs={12} className="mb-[10px]">
+              <Col md={12} xs={24} className="mb-[10px]">
                 <Form.Group controlId="lens">
                   <Form.ControlLabel>镜头🖲️</Form.ControlLabel>
                   <Form.Control
+                    size="lg"
                     name="lens"
                     block
                     accepter={InputPicker}
@@ -116,17 +152,26 @@ export const PromptGenerator = () => {
                   />
                 </Form.Group>
               </Col>
-              <Col xs={12} className="mb-[10px]">
+              <Col md={12} xs={24} className="mb-[10px]">
                 <Form.Group controlId="ar">
                   <Form.ControlLabel>画面比例</Form.ControlLabel>
-                  <Form.Control name="ar" placeholder="请选择输入画面比例" />
+                  <Form.Control
+                    size="lg"
+                    name="ar"
+                    placeholder="请选择输入画面比例"
+                  />
                 </Form.Group>
               </Col>
               <Col xs={24} xsHidden className="mb-[10px]"></Col>
-              <Col xs={12} className="mb-[10px]">
+              <Col md={12} xs={24} className="mb-[10px]">
                 <Form.Group controlId="elements">
                   <Form.ControlLabel>其他元素</Form.ControlLabel>
-                  <Form.Control rows={5} name="elements" accepter={Textarea} />
+                  <Form.Control
+                    size="lg"
+                    rows={3}
+                    name="elements"
+                    accepter={Textarea}
+                  />
                   <Form.HelpText>多个元素之间用英文逗号隔开</Form.HelpText>
                 </Form.Group>
               </Col>
@@ -134,7 +179,7 @@ export const PromptGenerator = () => {
           </Grid>
           <Form.Group>
             <ButtonToolbar>
-              <Button appearance="primary" onClick={handleSubmit}>
+              <Button className="btn-blue" block onClick={handleSubmit}>
                 生成Prompt
               </Button>
             </ButtonToolbar>

@@ -1,5 +1,5 @@
-import "./globals.css";
 import "rsuite/dist/rsuite.min.css";
+import "./globals.css";
 
 export const metadata = {
   title: "Midjourney Assistant",
