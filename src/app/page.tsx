@@ -1,91 +1,71 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from './page.module.css'
+import Image from "next/image";
+import { Inter } from "next/font/google";
+import { PromptGenerator } from "@/components/PromptGenerator";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="flex flex-col min-h-screen overflow-hidden">
+      {/*  Page content */}
+      <main className="flex-grow">
+        {/*  Page sections */}
+        <section className="relative">
+          {/* Illustration behind hero content */}
+          <div
+            className="absolute left-1/2 transform -translate-x-1/2 bottom-0 pointer-events-none"
+            aria-hidden="true"
           >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+            <svg
+              width="1360"
+              height="578"
+              viewBox="0 0 1360 578"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <linearGradient
+                  x1="50%"
+                  y1="0%"
+                  x2="50%"
+                  y2="100%"
+                  id="illustration-01"
+                >
+                  <stop stopColor="#FFF" offset="0%" />
+                  <stop stopColor="#EAEAEA" offset="77.402%" />
+                  <stop stopColor="#DFDFDF" offset="100%" />
+                </linearGradient>
+              </defs>
+              <g fill="url(#illustration-01)" fillRule="evenodd">
+                <circle cx="1232" cy="128" r="128" />
+                <circle cx="155" cy="443" r="64" />
+              </g>
+            </svg>
+          </div>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-        <div className={styles.thirteen}>
-          <Image src="/thirteen.svg" alt="13" width={40} height={31} priority />
-        </div>
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            {/* Hero content */}
+            <div className="pt-32 pb-12 md:pt-40 md:pb-2">
+              {/* Section header */}
+              <div className="text-center pb-12 md:pb-8">
+                <h1 className="text-5xl md:text-6xl font-extrabold leading-tighter tracking-tighter mb-4">
+                  Midjourney{" "}
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
+                    Photography
+                  </span>{" "}
+                  Creator
+                </h1>
+                <div className="max-w-3xl mx-auto">
+                  <p className="text-xl text-gray-600 mb-4">
+                    Midjourney Photography Assistant 是一个生成 Midjourney
+                    prompt 的工具，帮助你创作出照片级质感的作品。
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <PromptGenerator />
+      </main>
+    </div>
+  );
 }
